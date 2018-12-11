@@ -7,7 +7,6 @@ const Landing = () => (
       <p className="lead">Welcome to Blog It. have an idea to share with the world? welcome, the world wants to listen</p>
       <hr className="my-4"></hr>
       <p>this application was created by Jesus Casal as a demo project</p>
-      <a className="btn btn-primary btn-lg" href="#" role="button">Register Now !</a>
     </div>
   </div>
 )

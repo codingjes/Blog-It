@@ -1,19 +1,43 @@
-import React from "react";
-import BlogPreview from "../components/UI/blogpreview"
+import React, {Component} from "react";
+import axios from "axios"
+import BlogPreview from "../components/UI/blogpreview";
 
-const Blogs = (props) => {
-  const Preview = props.data.splice(0, 50).map( (blog) => {
+
+class Blogs extends Component {
+ state = {
+   blogs: [],
+ }
+
+ componentDidMount() {
+   axios.get("http://localhost:5000/api/blogs")
+    .then( res => {
+      this.setState({
+        blogs: res.data
+      })
+    })
+    .catch( err => {
+      console.log(err)
+    })
+ }
+
+  render() {
+    let blogs = this.state.blogs.map( blog => (
+      <BlogPreview
+        id={blog._id}
+        author={blog.author}
+        content={blog.content}
+        title={blog.title}
+        key={blog._id}
+      />
+    ))
     return (
-      <BlogPreview author={blog.name} content={blog.body} key={blog.id} id={blog.id}/>
-    )
-  })
-  return (
-    <div className="container">
-      <div className="row">
-        {Preview}
+      <div className="container">
+        <div className="row">
+          {blogs}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Blogs

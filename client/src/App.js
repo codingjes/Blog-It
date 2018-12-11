@@ -17,19 +17,6 @@ class App extends Component {
     blogs: []
   }
 
-  // componentDidMount(){
-  //   axios.get('https://jsonplaceholder.typicode.com/comments')
-  //     .then(response => {
-  //     // handle success
-  //     console.log(response);
-  //     this.setState({
-  //       blogs: response.data
-  //     })
-  //   }).catch( error => {
-  //     console.log(error);
-  //   })
-  // }
-
   render() {
     return (
       <Router>
@@ -38,7 +25,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={Landing} />
             <Route path="/about/" component={About} />
-            <Route path="/blogs/" render={ () => ( <Blogs data={this.state.blogs}/>)} />
+            <Route path="/blogs/" component={Blogs} />
             <Route path="/blog/:id" component={Blog} />
           </Switch>
           <Footer/>
