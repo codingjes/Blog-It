@@ -4,9 +4,9 @@ import React, { Component } from "react";
 class Blog extends Component{
   state = {
     blog: {
-      title: test,
-      content: test,
-      id: test
+      title: "test",
+      content: "test",
+      id: "test"
     }
   }
 

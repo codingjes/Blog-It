@@ -9,6 +9,7 @@ import Footer from "./components/Layout/footer"
 import Landing from "./pages/landing";
 import Blogs from "./pages/Blogs";
 import About from "./pages/about"
+import BlogCreate from "./pages/BlogCreate"
 // dynamic route Component
 import Blog from "./pages/Blog"
 
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path="/" exact component={Landing} />
             <Route path="/about/" component={About} />
             <Route path="/blogs/" component={Blogs} />
+            <Route path="/blog/create" component={BlogCreate} />
             <Route path="/blog/:id" component={Blog} />
           </Switch>
           <Footer/>
