@@ -27,7 +27,7 @@ mongoose
 app.get("/", (req, res) => res.send("<h1>hello world</h1>"));
 
 // Use routes
-app.use("/api/blogs", blogs)
+app.use("/api", blogs)
 
 const port = 5000;
 

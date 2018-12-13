@@ -1,31 +1,33 @@
 import React, { Component } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 class Blog extends Component{
   state = {
     blog: {
-      title: "test",
-      content: "test",
-      id: "test"
+      title: null,
+      content: null,
+      author: null,
+      id: null
     }
   }
 
-  // componentDidMount () {
-  //   const url = "https://jsonplaceholder.typicode.com/comments/" + this.props.match.params.id;
-  //   axios.get(url)
-  //     .then( response => {
-  //       this.setState({
-  //         blog: {
-  //           title: response.data.name,
-  //           content: response.data.body,
-  //           id: response.data.id
-  //         }
-  //       })
-  //     })
-  // }
+  componentDidMount () {
+    const url = "http://localhost:5000/api/blog/" + this.props.match.params.id;
+    axios.get(url)
+      .then( response => {
+        this.setState({
+          blog: {
+            title: response.data.title,
+            content: response.data.content,
+            author: response.data.author,
+            id: response.data._id
+          }
+        })
+      })
+      .catch(err => console.log(err))
+  }
 
   render(){
-    console.log(this.state)
     return(
       <div className="container">
         <h1>{this.state.blog.title}</h1>
