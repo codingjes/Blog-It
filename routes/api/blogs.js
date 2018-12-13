@@ -31,7 +31,7 @@ router.post("/blogs", (req, res) => {
 // route GET api/blog:id
 // desc: gets a single blog from the database
 //
-router.get('/blog/:id', (req, res) => {
+router.get("/blog/:id", (req, res) => {
   Blog
     .findById(req.params.id)
     .then( blog => {
@@ -43,14 +43,18 @@ router.get('/blog/:id', (req, res) => {
     .catch( err => console.log(err))
 });
 
-// // DELETES A USER FROM THE DATABASE
-// router.delete('/:id', function (req, res) {
-//     User.findByIdAndRemove(req.params.id, function (err, user) {
-//         if (err) return res.status(500).send("There was a problem deleting the user.");
-//         res.status(200).send("User: "+ user.name +" was deleted.");
-//     });
-// });
-//
+// DELETES A USER FROM THE DATABASE
+router.delete("/blog/:id", (req, res) => {
+    Blog
+      .findByIdAndRemove(req.params.id)
+      .then( deletedBlog => {
+        console.log("blog was deleted", deletedBlog)
+      })
+      .catch( err => {
+        res.status(500).send("there was a problem deleting the blog")
+      })
+});
+
 // // UPDATES A SINGLE USER IN THE DATABASE
 // router.put('/:id', function (req, res) {
 //     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {

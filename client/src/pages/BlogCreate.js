@@ -15,6 +15,7 @@ class BlogCreate extends Component{
       .post("http://localhost:5000/api/blogs", this.state)
       .then((res) => console.log(res))
       .catch( (err) => {console.log(err)})
+    this.props.history.push("/blogs")
   }
 
   handleChange = (e) => {

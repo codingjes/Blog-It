@@ -27,11 +27,23 @@ class Blog extends Component{
       .catch(err => console.log(err))
   }
 
+  deleteHandler = () => {
+    const url = "http://localhost:5000/api/blog/" + this.props.match.params.id
+    axios.delete(url)
+      .then( (blog) => {
+        console.log("deleted", blog)
+      })
+      .catch( err => console.log(err))
+       this.props.history.push("/blogs")
+  }
+
   render(){
+
     return(
       <div className="container">
         <h1>{this.state.blog.title}</h1>
         <p>{this.state.blog.content}</p>
+        <button onClick={this.deleteHandler}>Delete</button>
       </div>
     )
   }
