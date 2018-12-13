@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import BlogForm from "../components/UI/blogForm"
 import axios from "axios"
 
 class BlogCreate extends Component{
@@ -26,21 +27,10 @@ class BlogCreate extends Component{
 
   render(){
     return(
-      <form onSubmit={this.submitHandler}>
-        <label>
-          Title:
-          <input type="text" name="title" onChange={this.handleChange}/>
-        </label>
-        <label>
-          Content:
-          <input type="text" name="content" onChange={this.handleChange} />
-        </label>
-        <label>
-          Author:
-          <input type="text" name="author" onChange={this.handleChange}/>
-        </label>
-          <input type="submit" value="Submit" />
-      </form>
+      <BlogForm
+        submit={this.submitHandler}
+        change={this.handleChange}
+      />
     )
   }
 }
