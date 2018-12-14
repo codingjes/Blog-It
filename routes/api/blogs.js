@@ -48,7 +48,7 @@ router.delete("/blog/:id", (req, res) => {
     Blog
       .findByIdAndRemove(req.params.id)
       .then( deletedBlog => {
-        console.log("blog was deleted", deletedBlog)
+        res.json(deletedBlog)
       })
       .catch( err => {
         res.status(500).send("there was a problem deleting the blog")
