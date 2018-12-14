@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 class Blog extends Component{
   state = {
@@ -29,16 +30,15 @@ class Blog extends Component{
 
   deleteHandler = () => {
     const url = "http://localhost:5000/api/blog/" + this.props.match.params.id
-    axios.delete(url)
-      .then( (blog) => {
-        console.log("deleted", blog)
+    axios
+      .delete(url)
+      .then( (res) => {
+        this.props.history.push("/blogs")
       })
       .catch( err => console.log(err))
-       this.props.history.push("/blogs")
   }
 
   render(){
-
     return(
       <div className="container">
         <h1>{this.state.blog.title}</h1>
@@ -49,4 +49,4 @@ class Blog extends Component{
   }
 }
 
-export default Blog
+export default withRouter(Blog)

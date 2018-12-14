@@ -14,9 +14,10 @@ class BlogCreate extends Component{
     console.log("tried to submit", this.state)
     axios
       .post("http://localhost:5000/api/blogs", this.state)
-      .then((res) => console.log(res))
+      .then( (res) => {
+        this.props.history.push("/blogs")
+      })
       .catch( (err) => {console.log(err)})
-    this.props.history.push("/blogs")
   }
 
   handleChange = (e) => {
