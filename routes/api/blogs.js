@@ -55,13 +55,34 @@ router.delete("/blog/:id", (req, res) => {
       })
 });
 
-// // UPDATES A SINGLE USER IN THE DATABASE
-// router.put('/:id', function (req, res) {
-//     User.findByIdAndUpdate(req.params.id, req.body, {new: true}, function (err, user) {
-//         if (err) return res.status(500).send("There was a problem updating the user.");
-//         res.status(200).send(user);
-//     });
-// });
-
+// UPDATES A SINGLE BLOG IN THE DATABASE
+router.put("blog/:id", (req, res) => {
+  Blog
+  .findById(req.user.id)
+  .then(  blog => {
+    if (blog) {
+      // create the new blog data
+      const updatedBlog = {
+        title: req.body.title,
+        content: req.body.content,
+        author: req.body.author,
+      }
+      // Update
+      Profile
+        .findByIdAndUpdate(
+          req.user.id,
+          { $set: updatedBlog },
+          { new: true }
+        )
+        .then( newblog => {
+          res.json(newblog)
+          console.log(newblog)
+        })
+      } else {
+        res.status(500).send("the blog does not exist")
+      }
+    })
+    .catch( err => res.status(500).send("there was an error updating the blog"))
+})
 
 module.exports = router
