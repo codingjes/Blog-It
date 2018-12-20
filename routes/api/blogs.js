@@ -56,7 +56,7 @@ router.delete("/blog/:id", (req, res) => {
 });
 
 // UPDATES A SINGLE BLOG IN THE DATABASE
-router.put("blog/:id", (req, res) => {
+router.put("/blog/:id", (req, res) => {
   Blog
   .findById(req.user.id)
   .then(  blog => {

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import BlogForm from "../components/UI/blogForm"
 import axios from "axios"
 
 class BlogCreate extends Component{
@@ -11,7 +10,6 @@ class BlogCreate extends Component{
 
   submitHandler = (e) => {
     e.preventDefault()
-    console.log("tried to submit", this.state)
     axios
       .post("http://localhost:5000/api/blogs", this.state)
       .then( (res) => {
@@ -26,12 +24,32 @@ class BlogCreate extends Component{
      });
   }
 
+  updateOrAdd = (e) => {
+    if (this.props.update){
+      this.props.update(e, this.state)
+      return
+    }
+    this.submitHandler(e)
+  }
+
   render(){
+    console.log(this.props.update)
     return(
-      <BlogForm
-        submit={this.submitHandler}
-        change={this.handleChange}
-      />
+      <form onSubmit={this.updateOrAdd}>
+        <label>
+          Title:
+          <input type="text" name="title" onChange={(e) => this.handleChange(e)}/>
+        </label>
+        <label>
+          Content:
+          <input type="text" name="content" onChange={(e) => this.handleChange(e)} />
+        </label>
+        <label>
+          Author:
+          <input type="text" name="author" onChange={(e) => this.handleChange(e)}/>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     )
   }
 }
