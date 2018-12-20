@@ -38,8 +38,11 @@ class Blog extends Component{
   }
 
   updateAction = (e, state) => {
-    e.preventDefault()
-    console.log(state)
+  e.preventDefault()
+  const url = "http://localhost:5000/api/blog/" + this.props.match.params.id
+  axios.put(url,state)
+    .then( () => {this.props.history.push("/blogs")})
+    .catch(err => console.log(err))
   }
 
   render(){
@@ -52,6 +55,7 @@ class Blog extends Component{
       <div className="container">
         <h1>{this.state.blog.title}</h1>
         <p>{this.state.blog.content}</p>
+        <p>{this.state.blog.author}</p>
         <button onClick={this.deleteHandler}>Delete</button>
         <button onClick={this.updateFormHandler}>update</button>
         <button onClick={() => console.log(this.state)}>console.log the state</button>

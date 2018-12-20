@@ -33,7 +33,6 @@ class BlogCreate extends Component{
   }
 
   render(){
-    console.log(this.props.update)
     return(
       <form onSubmit={this.updateOrAdd}>
         <label>

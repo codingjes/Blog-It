@@ -56,33 +56,22 @@ router.delete("/blog/:id", (req, res) => {
 });
 
 // UPDATES A SINGLE BLOG IN THE DATABASE
-router.put("/blog/:id", (req, res) => {
-  Blog
-  .findById(req.user.id)
-  .then(  blog => {
-    if (blog) {
-      // create the new blog data
-      const updatedBlog = {
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-      }
-      // Update
-      Profile
-        .findByIdAndUpdate(
-          req.user.id,
-          { $set: updatedBlog },
-          { new: true }
-        )
-        .then( newblog => {
-          res.json(newblog)
-          console.log(newblog)
-        })
-      } else {
-        res.status(500).send("the blog does not exist")
+router.put('/blog/:id', (req, res, next) => {
+  const updatedBlog = {
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author,
+  }
+
+  Blog.findOneAndUpdate({_id: req.params.id}, {$set : updatedBlog}, { new : true},
+     (err, data) => {
+      if(data) {
+        res.json(data)
+      }else{
+        console.log("there was an error")
       }
     })
-    .catch( err => res.status(500).send("there was an error updating the blog"))
-})
+});
+
 
 module.exports = router
